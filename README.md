@@ -14,10 +14,11 @@ Tip: Hvis i har svært ved at finde jeres arduino-board inde fra processing kan 
 Følg guiden til og med "...to Arduino"-afsnittet: https://learn.sparkfun.com/tutorials/connecting-arduino-to-processing
 
 
-## Modtag data på den lækre måde.
-Det bliver hurtigt rodet at skulle modtage data i selve draw-funktionen i processing. Det kan vi undgå ved at gøre brug af den indbyggede `serialEvent` -funktion, som kaldes hver gang der modtages data. Ved hjælp af `bufferUntil()` kan vi endda få funktionen til at vente med at skyde, indtil der er modtaget et selvvalgt tegn. I vores tilfælde venter vi indtil vi modtager `"\n"`, hvilket er et linjeskift der automatisk sendes med når vi anvender println-funktionen i arduino. Når vi modtager dette ved vi altså at vi har modtaget en hel besked.
+## Modtag data på den lækre måde
+Det bliver hurtigt rodet at skulle modtage data i selve draw-funktionen i processing. Det kan vi undgå ved at gøre brug af den indbyggede `serialEvent` -funktion, som kaldes hver gang der modtages data. Ved hjælp af `bufferUntil()` kan vi endda få funktionen til at vente med at skyde, indtil der er modtaget et selvvalgt tegn. I vores tilfælde venter vi indtil vi modtager `"\n"`, hvilket er et linjeskift der automatisk sendes med når vi anvender println-funktionen i arduino. Når vi modtager dette ved vi altså at vi har modtaget en hel besked.  
 Vi kan komme ud for, at der kommer ekstra whitespace (mellemrum, linjeskift mm.) på den modtagne data, hvilket kan gøre dataen svær at arbejde med fremadrettet. Ved at bruge `trim()` funktionen kan vi fjerne alt dette og kun have den ønskede data tilbage.
-Vi er nu sikre på at vores modtagne data faktisk indeholder noget (er ikke null) og vi har renset den for whitespace. Nu vil den opmærksomme studerende måske have lagt mærke til at vi har indlæst og behandlet denne data som en string. Det gør vi fordi det simpelthen bare er nemmest at læse og behandle dataen når det er i denne type, men hvad gør vi, hvis det vi har modtaget ikke er en tekststreng men derimod et tal eller en boolean? Løsningen på dette er at *parse* vores modtagne data til en anden type. De typer vi typisk gerne vil parse til har heldigvis hverisær indbyggede funktioner til at tage imod sådan en string og spytte den ud som sin egen type:
+
+Vi er nu sikre på at vores modtagne data faktisk indeholder noget (er ikke null) og vi har renset den for whitespace. Nu vil den opmærksomme studerende måske have lagt mærke til, at vi har indlæst og behandlet denne data som en string. Det gør vi fordi det simpelthen bare er nemmest at læse og behandle dataen når det er i denne type. Men hvad gør vi, hvis det vi har modtaget ikke er en tekststreng, men derimod et tal eller en boolean? Løsningen på dette er at *parse* vores modtagne data til en anden type. De typer vi typisk gerne vil parse til har heldigvis hverisær indbyggede funktioner, til at tage imod sådan en string og spytte den ud som sin egen type:
 
 ```
 int heltalsVariabel = Integer.parseInt(modtagetString);
@@ -25,35 +26,35 @@ float kommatalsVariabel = Float.parseFloat(modtagetString);
 boolean bolskVaribel = Boolean.parseBoolean(modtagetString);
 ```
 
-Vær opmærksom på at parseBoolean funktionen kan være lidt drilsk da den kun parser en string der indholder "true" som *true* og alt andet som *false*. I kan altså ikke, når i vil parse, bruge arduino logikken hvor 1 betyder *true* og 0 betyder *false*. I det tilfælde giver det bedre mening at tjekke om strengen er lig med `.equals()` enten 0 eller 1 og så indsætte en værdi i jeres boolean variabel derefter. I kunne også parse til en int og tjekke ved hjælp af `==`.
+Vær opmærksom på at parseBoolean funktionen kan være lidt drilsk da den kun parser en string der indholder "true" som *true* og alt andet som *false*. I kan altså ikke, når i vil parse, bruge arduino logikken hvor 1 betyder *true* og 0 betyder *false*. I det tilfælde giver det bedre mening at tjekke om strengen er lig med `.equals()` enten "0" eller "1" og så indsætte en værdi i jeres boolean variabel derefter. I kan også parse til en int og tjekke ved hjælp af `==`.
 
 ### Opgave 2: Gør det lækkert
-Lav føste del af guiden (arduino til processing), hvor dataen modtages i serialEvent i stedet for draw. For bedre at illustrere alle de trin der kan finde sted, så sender vi et heltal, i stedet for "Hello World!"
+Lav føste del af guiden (arduino til processing), hvor dataen modtages i serialEvent istedet for draw. For bedre at illustrere alle de trin der kan finde sted, så sender vi et heltal, i stedet for "Hello World!"
 * Indsæt serialEvent funktionen i jeres kode.
 * Sæt bufferen på serialEvent til at buffer indtil \n ved hjælp af "bufferUntil('\n');"
-* Tjek at den læste string ikke er null
+* Tjek at den læste streng ikke er null
 * Rens den modtagne data med "trim()"
-* Parses den modtagne værdi til en passende type og sæt den i en variabel. readStringUntil-funktionen indlæser den modtagne data som en string. Hvis vi sender et tal, som vi gerne vil arbejde med skal vi kaste den modtagne data til int-typen.
+* Parse den modtagne værdi til en passende type og sæt den i en variabel.
 
 
-## Mere kompleks kommunikation:
+## Mere kompleks kommunikation
 På et tidspunkt vil vi gerne sende mere end bare enkelte værdier fra arduino til processsing. Men hvordan gør vi det på en måde så vi stadig ved hvilken data vi modtager?
-Vi kan vælge at sende alle værdierne samlet fra processing til arduino. Vi adskiller de enkelte værdier med et selvvalgt tegn og skiller dem ad i processing. Den nemmeste måde at gøre dette er ved at plusse alle værdierne og det selvvalgte tegn sammen til én string, der så sendes afsted:
-Den simpleste måde at gøre dette på er ved at benytte `print()` funktionen til at skrive alle værdier og seperatorer til samme linje og afslutte med en println, der indsætter et linjeskift.
+Vi kan vælge at sende alle værdierne samlet fra arduino til processing, i én besked. Vi adskiller de enkelte værdier med et selvvalgt seperator-tegn og skiller dem ad igen i processing.  
+Den simpleste måde at gøre dette på er ved at benytte `print()` funktionen til at skrive alle værdier og seperatorer til samme linje og afslutte med en `println()`, der indsætter et linjeskift.
 ```arduino
 print(sensorValue1);
 print(",");
 print(sensorValue2);
 println();
 ```
-Vi kan også kombinere værdierne og seperatorerne til én streng og sender denne streng med en println. Det kræver bare at vi caster vores værdier om til strenge:
+Vi kan også kombinere værdierne og seperatorerne til én streng og sende denne streng med en println. Det kræver bare at vi caster vores værdier om til strenge:
 ```
 String toSend = (String) sensorValue1 + "," + (String) sensorValue2;
 Serial.println(toSend);
 ```
 
-Vi kan også vælge at sende vores data enkeltvis, hvis det giver mere mening. Ulempen er her, at vi altså ikke ved, hvilken data der kommer hvornår. I forrige eksempel kom alle data i samme rækkefølge hver gang. Her kan vi måske komme ud for, at der kommer data fra samme sensor to gange i streg, før vi modtager data fra den anden sensor.
-En måde at identificere vores forskellige data på, er ved at vælge et unikt id, f.eks et bogstav, for hver sensor og tilføje dette id til begyndelsen af beskeden. Igen kan dette gøres enten ved at kombinere prints og printlns
+Vi kan også vælge at sende vores data enkeltvist, hvis det giver mere mening. Ulempen er her, at vi ikke ved, hvilken data der kommer hvornår. I forrige eksempel kom alle data i samme rækkefølge hver gang. Her kan vi måske komme ud for, at der kommer data fra samme sensor to gange i streg, før vi modtager data fra den anden sensor.
+En måde at identificere vores forskellige data på, er ved at vælge et unikt ID, f.eks et bogstav, for hver sensor og tilføje dette ID til begyndelsen af beskeden. Igen kan dette gøres enten ved at kombinere prints og printlns
 ```arduino
 Serial.print("A");
 Serial.println(sensorValue1);
@@ -66,8 +67,8 @@ Serial.println("A" + (String) sensorValue1);
 Serial.println("B" + (String) sensorValue2);
 ```
 
-Når vi har modtaget, tjekket og trimmet vores besked i processing vil vi gerne splitte den op i et ID og en værdi. Det gør vi ved at bruge substring().
-Derefter kan vi ud fra dette ID finde ud af hvilken type det giver mest mening at parse vores modtagne værdi til:
+Når vi har modtaget, tjekket og trimmet vores besked i processing vil vi gerne splitte den op i et ID og en værdi. Det gør vi ved at bruge `substring()`.
+Derefter kan vi, ud fra dette ID, finde ud af hvilken type det giver mest mening at parse vores modtagne værdi til:
 ```
 String ID = receivedMessage.substring(0, 1);
 String value = receivedMessage.substring(1);
