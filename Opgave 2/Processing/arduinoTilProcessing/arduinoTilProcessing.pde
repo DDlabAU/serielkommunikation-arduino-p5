@@ -26,14 +26,14 @@ void draw() {
 void serialEvent(Serial myPort){
     // Vi læser den modtagne data indtil vi kommer til linjeskiftet, hvilket vil sige hele beskeden
     // Det sætter vi ind i en midlertidig variabel vi bruger til at bearbejde indholdet
-    String recieved = myPort.readStringUntil('\n');
+    String received = myPort.readStringUntil('\n');
 
     // Vi tjekker at vores læste string ikke er null.
-    if(recieved != null){
+    if(received != null){
         // Vi fjerner eventuel ekstra whitespace omkring vores data
-        recieved = trim(recieved);
+        received = trim(received);
         // Vi parser vores data til int-typen og sætter den ind i en passende variabel
-        val = Integer.parseInt(recieved);
+        val = Integer.parseInt(received);
 
         //print it out in the console
         println(val);
