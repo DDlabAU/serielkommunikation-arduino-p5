@@ -2,8 +2,8 @@ import processing.serial.*;
 
 Serial myPort;
 
-int analogVar;
-boolean digitalVar;
+int potVar;
+boolean buttonVar;
 
 void setup() {
     // Vi udskriver alle tilgængelige porte/enheder for at få et bedre overblik
@@ -20,21 +20,21 @@ void draw() {
 
 }
 
-void serialEvent(Serial myPort){
+void serialEvent(Serial myPort) {
     // Vi læser den modtagne data indtil vi kommer til linjeskiftet, hvilket vil sige hele beskeden
     // Det sætter vi ind i en midlertidig variabel vi bruger til at bearbejde indholdet
-    String recieved = myPort.readStringUntil('\n');
+    String received = myPort.readStringUntil('\n');
 
     // Vi tjekker at vores læste string ikke er null.
-    if(recieved != null){
+    if(received != null){
         // Vi fjerner eventuel ekstra whitespace omkring vores data
-        recieved = trim(recieved);
+        received = trim(received);
 
         // Vi parser vores data til int-typen og sætter den ind i en passende variabel
-        String[] splitValues = split(recieved, ",");
+        String[] splitValues = split(received, ",");
 
         // Vi ved at den første værdi er en analog læsning så denne vil vi gerne have som int
-        analogVar = Integer.parseInt(splitValues[0]);
+        potVar = Integer.parseInt(splitValues[0]);
 
         // Vi ved at den anden værdi er en digital læsning der giver mest mening at have som en boolean.
         // I dette tilfælde ved vi også at den er sendt som enten 1 eller 0, så vi kan ikke bruge Boolen.parseBoolean() funktionen.
@@ -45,34 +45,34 @@ void serialEvent(Serial myPort){
         // Her vælger vi at sammenligne den modtagne streng med strengen "1".
         // På den måde bruger vi samme logik som arduino hvor 1 er lig med true og 0 lig med false, uden vi behøver at parse.
         if(splitValues[1].equals("1")){
-            digitalVar = true;
+            buttonVar = true;
         } else {
-            digitalVar = false;
+            buttonVar = false;
         }
 
         // Man kunne også parse til int og sammenligne med tallet 1. I modsætning til tekststrengen "1" som ovenfor.
         // Det ville se sådan ud:
         //
-        // int recievedVal = Integer.parseInt(splitValues[1]);
-        // if(recivedVal == 1){
-        //     digitalVar = true;
+        // int receivedVal = Integer.parseInt(splitValues[1]);
+        // if(receivedVal == 1){
+        //     buttonVar = true;
         // } else{
-        //     digitalVar = false;
+        //     buttonVar = false;
         // }
         //
 
         // Hvis vi havde sendt "true" eller "false" fra arduino, kunne vi have brugt Boolean.parseBoolean().
         // Der er her markant mindre kode, fordi vi i stedet vil have et if/else statement i vores arduino kode.
         //
-        // digitalVar = Boolean.parseBoolean(splitValues[1]);
+        // buttonVar = Boolean.parseBoolean(splitValues[1]);
 
         // Til sidst printer vi værdierne
         println();
         print("Den modtagne besked: ");
-        println(recieved);
-        print("AnalogVar: ");
-        println(AnalogVar);
-        print("DigitalVar: ");
-        println(digitalVar);
+        println(received);
+        print("potVar: ");
+        println(potVar);
+        print("buttonVar: ");
+        println(buttonVar);
     }
 }
