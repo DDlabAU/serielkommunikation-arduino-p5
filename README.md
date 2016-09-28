@@ -39,26 +39,48 @@ Lav føste del af guiden (arduino til processing), hvor dataen modtages i serial
 ## Mere kompleks kommunikation:
 På et tidspunkt vil vi gerne sende mere end bare enkelte værdier fra arduino til processsing. Men hvordan gør vi det på en måde så vi stadig ved hvilken data vi modtager?
 Vi kan vælge at sende alle værdierne samlet fra processing til arduino. Vi adskiller de enkelte værdier med et selvvalgt tegn og skiller dem ad i processing. Den nemmeste måde at gøre dette er ved at plusse alle værdierne og det selvvalgte tegn sammen til én string, der så sendes afsted:
-```arduino  
-String toSend = "" + sensorValue1 + "," + sensorValue2;
+Den simpleste måde at gøre dette på er ved at benytte `print()` funktionen til at skrive alle værdier og seperatorer til samme linje og afslutte med en println, der indsætter et linjeskift.
+```arduino
+print(sensorValue1);
+print(",");
+print(sensorValue2);
+println();
+```
+Vi kan også kombinere værdierne og seperatorerne til én streng og sender denne streng med en println. Det kræver bare at vi caster vores værdier om til strenge:
+```
+String toSend = (String) sensorValue1 + "," + (String) sensorValue2;
+Serial.println(toSend);
 ```
 
 Vi kan også vælge at sende vores data enkeltvis, hvis det giver mere mening. Ulempen er her, at vi altså ikke ved, hvilken data der kommer hvornår. I forrige eksempel kom alle data i samme rækkefølge hver gang. Her kan vi måske komme ud for, at der kommer data fra samme sensor to gange i streg, før vi modtager data fra den anden sensor.
-En måde at identificere vores forskellige data på, er ved at vælge et unikt id, f.eks et bogstav, for hver sensor og tilføje dette id til begyndelsen af beskeden.
+En måde at identificere vores forskellige data på, er ved at vælge et unikt id, f.eks et bogstav, for hver sensor og tilføje dette id til begyndelsen af beskeden. Igen kan dette gøres enten ved at kombinere prints og printlns
 ```arduino
-String toSend = "A" + sensorValue1;
-Serial.println(toSend);
-String toSend = "B" + sensorValue2;
-Serial.println(toSend);
+Serial.print("A");
+Serial.println(sensorValue1);
+Serial.print("B");
+Serial.println(sensorValue2);
+```
+eller ved at caste værdien og kombinere den med ID'et til en streng.
+```arduino
+Serial.println("A" + (String) sensorValue1);
+Serial.println("B" + (String) sensorValue2);
 ```
 
-Når vi modtager data i processing tjekker vi hvad det første tegn i beskeden er. Det kan vi vælge at gøre med `charAt()` eller `substring()`. charAt giver en character og substring en string, vælg den i er tryggest ved.
-Er det første tegn i beskeden et 'A' ved vi at værdien er sensorValue1, er det derimod et 'B' ved vi at det er sensorValue2. Derudfra kan vi bearbejde resten af dataen på en passende måde.
-
+Når vi har modtaget, tjekket og trimmet vores besked i processing vil vi gerne splitte den op i et ID og en værdi. Det gør vi ved at bruge substring().
+Derefter kan vi ud fra dette ID finde ud af hvilken type det giver mest mening at parse vores modtagne værdi til:
+```
+String ID = receivedMessage.substring(0, 1);
+String value = receivedMessage.substring(1);
+if(ID.equals("A")){
+    // Cast value-variablen til en bestemt type
+} else if(ID.equals("B")){
+    // Cast den til en anden type
+}
+```
 
 ### Opgave 3: Kombinér, send, split
-* Tilslut mindst to sensorer til jeres arduino.
-* Send data fra disse sensorer til processing:
+* Tilslut et potentiometer og en knap til jeres arduino.
+* Send data fra disse til processing:
   * I én samlet besked.
   * Separer værdierne med selvvalgt tegn.
 * Modtag data i processing (på den lækre måde, som i lærte tidligere):
@@ -67,12 +89,12 @@ Er det første tegn i beskeden et 'A' ved vi at værdien er sensorValue1, er det
   * Print værdierne ud i konsollen eller skriv dem på skærmen.
 
 ### Opgave 4: Send separat med ID.
-* Tilslut mindst to sensorer til jeres arduino.
-* Send data fra disse sensorer til processing:
+* Tilslut et potentiometer og en knap til jeres arduino.
+* Send data fra disse til processing:
   * Enkeltvist
-  * Vælg et unikt id og sæt dette ind første i dataen som i sender
+  * Vælg et unikt id og sæt dette ind første i dataen som i sender.
 * Modtag data i processing (på den lækre måde, som i lærte tidligere):
-  * Undersøg hvad det første tegn i den modtagne data er.
-  * Parse den modtagne værdi til en passende datatype.
+  * Del den modtagne data op i ID og værdi og sæt disse i passende variabler
+  * Parse den modtagne værdi til en passende datatype udfra dets ID.
   * Sæt værdien ind i den matchende variabel.
   * Print værdierne ud i konsollen eller skriv dem på skærmen.
