@@ -1,4 +1,4 @@
-# Serialkommunikation mellem arduino og processing
+# Serielkommunikation mellem arduino og processing
 Dette er en begyndervejledning til serielkommunikation mellem arduino og processing. I vil blive introduceret til simpel kommunikation fra processing til arduino og mere kompleks kommunikation fra arduino til processing.
 Det forudsættes at i har styr på det basale arduino og er i stand til at opsætte og læse simple sensorer så som potentiometre og knapper. Der forventes også et basalt kendskab til processing.
 Når i færdige med guiden vil i være i stand til at sende simple kommandoer fra processing til arduino og sende op til flere læste værdier fra arduino til processing, enten samlet eller ved hjælp af et simpelt id-system.
