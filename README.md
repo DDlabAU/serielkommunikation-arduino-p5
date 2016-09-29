@@ -56,7 +56,7 @@ Vi kan også kombinere værdierne og seperatorerne til én streng og sende denne
 String toSend = (String) sensorValue1 + "," + (String) sensorValue2;
 Serial.println(toSend);
 ```
-I processen modtager, tjekker og trimmer vi beskeden og splitter den så op til en liste af værdier:
+I processing modtager, tjekker og trimmer vi beskeden og splitter den så op til en liste af værdier:
 ```
 String[] splitValues = split(received, ",");
 int sensor1Var = Integer.parseInt(splitValues[0]);
@@ -115,14 +115,14 @@ https://processing.org/reference/
 https://processing.org/reference/libraries/serial/
 
 ### Opgave 2
-[serialEvent](https://processing.org/reference/libraries/serial/serialEvent_.html)
-[bufferUntil](https://processing.org/reference/libraries/serial/Serial_bufferUntil_.html)
-[readStringUntil](https://processing.org/reference/libraries/serial/Serial_readStringUntil_.html)
-[trim](https://processing.org/reference/trim_.html)
-[equals](https://processing.org/reference/String_equals_.html)
+[serialEvent](https://processing.org/reference/libraries/serial/serialEvent_.html)    
+[bufferUntil](https://processing.org/reference/libraries/serial/Serial_bufferUntil_.html)    
+[readStringUntil](https://processing.org/reference/libraries/serial/Serial_readStringUntil_.html)    
+[trim](https://processing.org/reference/trim_.html)    
+[equals](https://processing.org/reference/String_equals_.html)    
 
 ### Opgave 3
-[split](https://processing.org/reference/split_.html)
+[split](https://processing.org/reference/split_.html)    
 
 ### Opgave 4
-[substring](https://processing.org/reference/String_substring_.html)
+[substring](https://processing.org/reference/String_substring_.html)    
