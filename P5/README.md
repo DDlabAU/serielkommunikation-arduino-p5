@@ -14,13 +14,13 @@ Tip: Hvis i har svært ved at finde jeres arduino-board inde fra processing kan 
 Følg guiden til og med "...to Arduino"-afsnittet: https://learn.sparkfun.com/tutorials/connecting-arduino-to-processing
 
 
-## Modtag data på den lækre måde
+## Modtag data på den pæne måde
 Det bliver hurtigt rodet at skulle modtage data i selve draw-funktionen i processing. Det kan vi undgå ved at gøre brug af den indbyggede `serialEvent` -funktion, som kaldes hver gang der modtages data. Ved hjælp af `bufferUntil()` kan vi endda få funktionen til at vente med at skyde, indtil der er modtaget et selvvalgt tegn. I vores tilfælde venter vi indtil vi modtager `"\n"`, hvilket er et linjeskift der automatisk sendes med når vi anvender println-funktionen i arduino. Når vi modtager dette ved vi altså at vi har modtaget en hel besked.
 Vi kan så læse hele denne besked ved hjælp af `readStringUntil()`, der læser alt der er tilgængeligt op til en given karakter. I vores tilfælde giver det mening at lade denne karakter være '\n', da det er den sidste i beskeden, hvilket betyder at vi læser hele beskeden (med undtagelse af linjeskiftet) ind som en string.
 Det kan hænde at der sker fejl i kommunikationen mellem arduino og processing og den læste string faktisk ikke indeholder noget. For at sikre os imod det laver vi et simpelt tjek `modtagetString != null`.
 Vi kan også komme ud for, at der kommer ekstra whitespace (mellemrum) på den modtagne data, hvilket kan gøre dataen svær at arbejde med fremadrettet. Ved at bruge `trim()` funktionen kan vi fjerne alt dette og kun have den ønskede data tilbage.
 
-Vi er nu sikre på at vores modtagne data faktisk indeholder noget (er ikke null) og vi har renset den for whitespace. Nu vil den opmærksomme studerende måske have lagt mærke til, at vi har indlæst og behandlet denne data som en string. Det gør vi fordi det simpelthen bare er nemmest at læse og behandle dataen når det er i denne type. Men hvad gør vi, hvis det vi har modtaget ikke er en tekststreng, men derimod et tal eller en boolean? Løsningen på dette er at *parse* vores modtagne data til en anden type. De typer vi typisk gerne vil parse til har heldigvis hverisær indbyggede funktioner, til at tage imod sådan en string og spytte den ud som sin egen type:
+Vi er nu sikre på at vores modtagne data faktisk indeholder noget (ikke er null) og vi har renset den for whitespace. Nu vil den opmærksomme studerende måske have lagt mærke til, at vi har indlæst og behandlet denne data som en string. Det gør vi fordi det simpelthen bare er nemmest at læse og behandle dataen når det er i denne type. Men hvad gør vi, hvis det vi har modtaget ikke er en tekststreng, men derimod et tal eller en boolean? Løsningen på dette er at *parse* vores modtagne data til en anden type. De typer vi typisk gerne vil parse til har heldigvis hverisær indbyggede funktioner, til at tage imod sådan en string og spytte den ud som sin egen type:
 
 ```
 int heltalsVariabel = Integer.parseInt(modtagetString);
@@ -30,19 +30,19 @@ boolean bolskVaribel = Boolean.parseBoolean(modtagetString);
 
 Vær opmærksom på at parseBoolean funktionen kan være lidt drilsk da den kun parser en string der indholder "true" som *true* og alt andet som *false*. I kan altså ikke, når i vil parse, bruge arduino logikken hvor 1 betyder *true* og 0 betyder *false*. I det tilfælde giver det bedre mening at tjekke om strengen er lig med `.equals()` enten "0" eller "1" og så indsætte en værdi i jeres boolean variabel derefter. I kan også parse til en int og tjekke ved hjælp af `==`.
 
-### Opgave 2: Gør det lækkert
+### Opgave 2: Gør det pænt
 Lav føste del af guiden (arduino til processing), hvor dataen modtages i serialEvent istedet for draw. For bedre at illustrere alle de trin der kan finde sted, så sender vi et heltal, i stedet for "Hello World!"
 * Ret i arduinokoden så i sender et tal i stedet for tekstbeskeden fra tidligere
 * Indsæt serialEvent funktionen i jeres kode.
 * Sæt bufferen på serialEvent til at buffer indtil \n ved hjælp af "bufferUntil('\n');"
-* Læs den modtagne besked i serielEvent med readStringUntil-funktionen
+* Læs den modtagne besked i serialEvent med readStringUntil-funktionen
 * Tjek at den læste streng ikke er null
 * Rens den modtagne data med "trim()"
 * Parse den modtagne værdi til en passende type og sæt den i en variabel.
 
 
 ## Mere kompleks kommunikation
-På et tidspunkt vil vi gerne sende mere end bare enkelte værdier fra arduino til processsing. Men hvordan gør vi det på en måde så vi stadig ved hvilken data vi modtager?
+På et tidspunkt vil vi gerne sende mere end bare enkelte værdier fra arduino til processsing. Men hvordan gør vi det på en måde, så vi stadig ved, hvilken data vi modtager?
 Vi kan vælge at sende alle værdierne samlet fra arduino til processing, i én besked. Vi adskiller de enkelte værdier med et selvvalgt seperator-tegn og skiller dem ad igen i processing med `split()` funktionen.  
 Den simpleste måde at gøre dette på er ved at benytte `print()` funktionen til at skrive alle værdier og seperatorer til samme linje og afslutte med en `println()`, der indsætter et linjeskift.
 ```arduino
@@ -93,17 +93,17 @@ if(ID.equals("A")){
 * Læs og send data fra disse til processing:
   * I én samlet besked.
   * Separer værdierne med selvvalgt tegn.
-* Modtag data i processing (på den lækre måde, som i lærte tidligere):
+* Modtag data i processing (på den pæne måde, som i lærte tidligere):
   * Split jeres data op ved jeres selvvalgte tegn med split()-funktionen.
   * Parse de individuelle værdier til passende typer og sæt dem i variabler.
   * Print værdierne ud i konsollen eller skriv dem på skærmen.
 
-### Opgave 4: Send separat med ID.
+### Opgave 4: Send separat med ID
 * Tilslut et potentiometer og en knap til jeres arduino.
 * Læs og send data fra disse til processing:
   * Enkeltvist
   * Vælg et unikt id og sæt dette ind første i dataen som i sender.
-* Modtag data i processing (på den lækre måde, som i lærte tidligere):
+* Modtag data i processing (på den pæne måde, som i lærte tidligere):
   * Del den modtagne data op i ID og værdi og sæt disse i passende variabler
   * Parse den modtagne værdi til en passende datatype udfra dets ID.
   * Sæt værdien ind i den matchende variabel.
