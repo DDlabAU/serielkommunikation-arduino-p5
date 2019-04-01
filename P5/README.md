@@ -32,7 +32,7 @@ Vær opmærksom på at parseBoolean funktionen kan være lidt drilsk da den kun 
 
 ### Opgave 2: Gør det pænt
 Lav føste del af guiden (arduino til processing), hvor dataen modtages i serialEvent istedet for draw. For bedre at illustrere alle de trin der kan finde sted, så sender vi et heltal, i stedet for "Hello World!"
-* Ret i arduinokoden så i sender et tal i stedet for tekstbeskeden fra tidligere
+* Ret i arduinokoden så I sender et tal i stedet for tekstbeskeden fra tidligere
 * Indsæt serialEvent funktionen i jeres kode.
 * Sæt bufferen på serialEvent til at buffer indtil \n ved hjælp af "bufferUntil('\n');"
 * Læs den modtagne besked i serialEvent med readStringUntil-funktionen
