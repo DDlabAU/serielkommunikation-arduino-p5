@@ -29,9 +29,11 @@ Denne tutorial vil gøre dig i stand til at etablere serial-kommunikation mellem
 6. åben PC commandPrompt eller MAC Terminalen
 
 7. npm install p5.serialserver
+![install serialserver](https://github.com/DDlabAU/serielkommunikation-arduino-p5/blob/master/P5JS/media/npm%20install.png)
 
 8. node ~/node_modules/p5.serialserver/startserver.js
+![node start server](https://github.com/DDlabAU/serielkommunikation-arduino-p5/blob/master/P5JS/media/node%20start%20server.png)
 
 9. hvis serialserveren kører skulle det gerne se sådan ud.
-
+![server is running](https://github.com/DDlabAU/serielkommunikation-arduino-p5/blob/master/P5JS/media/server%20is%20running.png)
 10. compile din p5.js sketch og interager med potentiometrene.
