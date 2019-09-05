@@ -10,17 +10,19 @@ Denne tutorial vil gøre dig i stand til at etablere serial-kommunikation mellem
 
 2. tilslut din arduino og find ud af hvilken port den er tilsluttet med på din PC/MAC
 
-   [insert billede]
+   ![arduport](https://github.com/DDlabAU/serielkommunikation-arduino-p5/blob/master/P5JS/media/arduino%20port%20name.png)
 
 3. inde i serielkommunikation-arduino-p5/P5JS/P5/sketch.js på linje 6 står der 
 
+   ```javascript
    var portName = '/dev/cu.usbmodem1411';
+   ```
 
    her indsætter du dit eget portname. og gemmer filen (ctrl(cmd)-s)
 
 4. byg kredsløbet til arduinoen i følge tegningen. 
 
-   [insert schematic]
+   ![insert schematic](https://github.com/DDlabAU/serielkommunikation-arduino-p5/blob/master/P5JS/media/arduino%20kredsl%C3%B8b.png)
 
 5. Upload scriptet til arduinoen
 
