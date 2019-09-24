@@ -1,14 +1,14 @@
 // npm install p5.serialserver
 // node ~/node_modules/p5.serialserver/startserver.js
 
-var serial; 
-var options = {baudrate: 9600};
+var serial;
+var options = {baudRate: 9600};
 var portName = '/dev/cu.usbmodem1411';
 var x1 = 0; 
-var y1 = 0; 
-var x2 = 0; 
+var y1 = 0;
+var x2 = 0;
 var y2 = 0;
-var xIn = 0; 
+var xIn = 0;
 var yIn = 0;
 
 function setup() {
@@ -26,12 +26,12 @@ function setup() {
 function draw() {
   fill(255); stroke(400);
 
-  if (xIn > 500) x2 += 1; 
-  if (xIn < 300) x2 -= 1; 
+  if (xIn > 500) x2 += 1;
+  if (xIn < 300) x2 -= 1;
 
-  if (yIn > 500) y2 += 1; 
-  if (yIn < 300) y2 -= 1; 
-  
+  if (yIn > 500) y2 += 1;
+  if (yIn < 300) y2 -= 1;
+
   line(x1, y1, x2, y2); }
 
 function serialEvent() {
