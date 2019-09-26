@@ -29,7 +29,7 @@ Denne tutorial vil gøre dig i stand til at etablere serial-kommunikation mellem
 6. åben PC commandPrompt eller MAC Terminalen
 
 7. npm install p5.serialserver
-![install serialserver](https://github.com/DDlabAU/serielkommunikation-arduino-p5/blob/master/P5JS/media/npm%20install.png)
+![install serialserver](/media/node start server)
 
 8. node ~/node_modules/p5.serialserver/startserver.js
 ![node start server](https://github.com/DDlabAU/serielkommunikation-arduino-p5/blob/master/P5JS/media/node%20start%20server.png)
