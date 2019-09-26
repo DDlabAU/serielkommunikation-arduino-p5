@@ -30,14 +30,14 @@ Denne tutorial vil gøre dig i stand til at etablere serial-kommunikation mellem
 
 7. npm install p5.serialserver
 
-  ![install serialserver](../media/npm install.png)
+  ![install serialserver](/media/npm install.png)
 
 8. node ~/node_modules/p5.serialserver/startserver.js
 
-  ![install serialserver](../media/node start server.png)
+  ![install serialserver](/media/node start server.png)
 
 9. hvis serialserveren kører skulle det gerne se sådan ud.
 
-![install serialserver](../media/server is running.png)
+![install serialserver](/media/server is running.png)
 
 compile din p5.js sketch og interager med potentiometrene for at manipulere sketchen.
