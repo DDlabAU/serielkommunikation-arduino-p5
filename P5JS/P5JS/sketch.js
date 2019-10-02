@@ -4,7 +4,7 @@
 var serial;
 var options = {baudRate: 9600};
 var portName = '/dev/cu.usbmodem1411';
-var x1 = 0; 
+var x1 = 0;
 var y1 = 0;
 var x2 = 0;
 var y2 = 0;
@@ -36,8 +36,10 @@ function draw() {
 
 function serialEvent() {
   var inString = serial.readStringUntil('\r\n');
-
+  console.log(inString);
   if (inString.length > 0 ) {
     var splitString = split(inString, "//");
     xIn = Number(splitString[0]);
-    yIn = Number(splitString[1]); } }
+    yIn = Number(splitString[1]);
+  }
+}
