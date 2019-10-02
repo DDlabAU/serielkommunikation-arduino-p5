@@ -42,6 +42,9 @@ function draw() {
     y2 -= 1;
   }
 
+  x2 = constrain(x2, 0, width);
+  y2 = constrain(y2, 0, height);
+
   line(x1, y1, x2, y2);
 }
 
