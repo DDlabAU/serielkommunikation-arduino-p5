@@ -2,6 +2,7 @@
 
 Denne tutorial vil gøre dig i stand til at etablere serial-kommunikation mellem din p5.js sketch og din arduino gennem node.js.
 
+![](./media/demo.jpg)
 
 
 ## Getting started
