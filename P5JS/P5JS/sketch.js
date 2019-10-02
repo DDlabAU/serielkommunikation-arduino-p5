@@ -20,10 +20,10 @@ function setup() {
 //  serial.on('error', serialError);
   serial.open(portName, options);
 
-  x1 = window.innerWidth/2;
-  y1 = window.innerHeight/2;
-  x2 = window.innerWidth/2;
-  y2 = window.innerHeight/2;
+  x1 = width/2;
+  y1 = height/2;
+  x2 = width/2;
+  y2 = height/2;
 }
 
 function draw() {
@@ -48,7 +48,7 @@ function draw() {
 function serialEvent() {
   var inString = serial.readStringUntil('\r\n');
   console.log(inString);
-  
+
   if (inString.length > 0 ) {
     var splitString = split(inString, "//");
     xIn = Number(splitString[0]);
