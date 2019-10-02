@@ -3,13 +3,19 @@
 
 var serial;
 var options = {baudRate: 9600};
+
+// Typisk portName på mac
+// Kig i arduino IDE for at finde den korrekte port
 var portName = '/dev/cu.usbmodem1411';
-var x1 = 0;
-var y1 = 0;
-var x2 = 0;
-var y2 = 0;
-var xIn = 0;
-var yIn = 0;
+// Typisk portName på windows
+// var portName = 'com10';
+
+var x1;
+var y1;
+var x2;
+var y2;
+var xIn;
+var yIn;
 
 function setup() {
   createCanvas(800, 800);
@@ -30,17 +36,8 @@ function draw() {
   fill(255);
   stroke(400);
 
-  if (xIn > 500) {
-    x2 += 1;
-  } else if (xIn < 300) {
-    x2 -= 1;
-  }
-
-  if (yIn > 500){
-    y2 += 1;
-  } else if (yIn < 300){
-    y2 -= 1;
-  }
+  x2 = xIn;
+  y2 = yIn;
 
   x2 = constrain(x2, 0, width);
   y2 = constrain(y2, 0, height);
