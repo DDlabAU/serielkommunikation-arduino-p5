@@ -1,17 +1,24 @@
-int potentiometer1; 
-int potentiometer2;
-int mappedPot1; 
-int mappedPot2;
+int pot1Pin = A4;
+int pot2Pin = A5;
+int pot1Val;
+int pot2Val;
+int mappedPot1Val;
+int mappedPot2Val;
 
 void setup() {
- Serial.begin(9600); }
+  pinMode(pot1Pin, INPUT);
+  pinMode(pot2Pin, INPUT);
+
+  Serial.begin(9600);
+}
 
 void loop() {
- potentiometer1 = analogRead(A5);
- potentiometer2 = analogRead(A4);
- mappedPot1 = map(potentiometer1, 0, 1023, 0, 800);
- mappedPot2 = map(potentiometer2, 0, 1023, 0, 800);
- Serial.print(mappedPot1);
+ pot1Val = analogRead(pot1Pin);
+ pot2Val = analogRead(pot2Pin);
+ mappedPot1Val = map(pot1Val, 0, 1023, 0, 800);
+ mappedPot2Val = map(pot2Val, 0, 1023, 0, 800);
+ Serial.print(mappedPot1Val);
  Serial.print("//");
- Serial.println(mappedPot2);
- delay(1); }
+ Serial.println(mappedPot2Val);
+ delay(1); 
+}
