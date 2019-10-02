@@ -12,7 +12,9 @@ var xIn = 0;
 var yIn = 0;
 
 function setup() {
-  createCanvas(800, 800); background(0);
+  createCanvas(800, 800);
+  background(0);
+
   serial = new p5.SerialPort();
   serial.on('data', serialEvent);
 //  serial.on('error', serialError);
@@ -21,22 +23,32 @@ function setup() {
   x1 = window.innerWidth/2;
   y1 = window.innerHeight/2;
   x2 = window.innerWidth/2;
-  y2 = window.innerHeight/2; }
+  y2 = window.innerHeight/2;
+}
 
 function draw() {
-  fill(255); stroke(400);
+  fill(255);
+  stroke(400);
 
-  if (xIn > 500) x2 += 1;
-  if (xIn < 300) x2 -= 1;
+  if (xIn > 500) {
+    x2 += 1;
+  } else if (xIn < 300) {
+    x2 -= 1;
+  }
 
-  if (yIn > 500) y2 += 1;
-  if (yIn < 300) y2 -= 1;
+  if (yIn > 500){
+    y2 += 1;
+  } else if (yIn < 300){
+    y2 -= 1;
+  }
 
-  line(x1, y1, x2, y2); }
+  line(x1, y1, x2, y2);
+}
 
 function serialEvent() {
   var inString = serial.readStringUntil('\r\n');
   console.log(inString);
+  
   if (inString.length > 0 ) {
     var splitString = split(inString, "//");
     xIn = Number(splitString[0]);
