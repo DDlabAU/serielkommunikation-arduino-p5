@@ -38,9 +38,11 @@ På linje 6 står der
 
   ![install serialserver](./media/npm-install.png)
 
-8. Skriv så ```node ~/node_modules/p5.serialserver/startserver.js``` for at starte den
+8. Hvis du er på en Mac, så skriv ```node ~/node_modules/p5.serialserver/startserver.js``` ellers, så skriv ```node ./node_modules/p5.serialserver/startserver.js```for at starte den
 
   ![install serialserver](./media/node-start-server.png)
+
+  ![install serialserver](./media/startserver_windows.png)
 
 9. Hvis serialserveren kører, skulle det gerne se sådan ud. Lad terminalvinduet forblive åbent så længe du skal bruge serveren. Du vil også se fejlbeskeder her i terminalen, hvis der opstår problemer i kommunikationen mellem arduinoen og p5js.
 
