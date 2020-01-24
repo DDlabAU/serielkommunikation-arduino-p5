@@ -20,7 +20,7 @@ For at lave en forbindelse mellem din arduino og p5js skal du bruge 3 ting: ardu
    ![install serialserver](./media/arduino-port-name.png)
 
 3. Åbn så p5js koden der ligger her: ```P5JS/P5JS/sketch.js```
-På linje 6 står der
+På linje 9 står der
 
    ```var portName = '/dev/cu.usbmodem1411';```
 
