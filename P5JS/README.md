@@ -38,7 +38,7 @@ På linje 9 står der
 
   ![install serialserver](./media/npm-install.png)
 
-8. Hvis du er på en Mac, så skriv ```node ~/node_modules/p5.serialserver/startserver.js``` ellers, så skriv ```node ./node_modules/p5.serialserver/startserver.js```for at starte den
+8. Hvis du er på en Mac, ```node ~/node_modules/p5.serialserver/startserver.js``` ellers, Windows ```node ./node_modules/p5.serialserver/startserver.js```for at starte den
 
   ![install serialserver](./media/node-start-server.png)
 
