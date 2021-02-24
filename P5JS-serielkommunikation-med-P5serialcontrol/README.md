@@ -44,3 +44,6 @@ På linje 7 står der
 10. Kør så din p5js sketch og interager med dine potentiometre for at styre p5js sketchen.   
 Du kan f.eks. åbne den med ```atom-live-server```-pakken, hvis du bruger Atom.   
 Hvis du vil se selve værdierne som sketchen modtager, kan du åbne konsollen i din browser, hvor de bliver vist.
+
+
+For mere information eller eksempler, se p5 seriel controls egen github side: https://github.com/p5-serial/p5.serialport
