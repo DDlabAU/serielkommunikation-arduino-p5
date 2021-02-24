@@ -1,15 +1,14 @@
 # Serielkommunikation mellem arduino og P5JS
 
-Denne tutorial vil gøre dig i stand til at etablere serial-kommunikation mellem din p5.js sketch og din arduino gennem node.js.
+Denne tutorial vil gøre dig i stand til at etablere serial-kommunikation mellem din p5.js sketch og din arduino gennem P5 serial control app.
 
-![](./media/demo.jpg)
 
 
 ## Getting started
 
-For at lave en forbindelse mellem din arduino og p5js skal du bruge 3 ting: arduinokode, p5js kode og en node serielserver. Trinnene nedenfor sætter denne server op og kører eksempelkode på arduino og p5js, så du kan styre en p5js sketch med to potentiometre fra din arduino.
+For at lave en forbindelse mellem din arduino og p5js skal du bruge 3 ting: arduinokode, p5js kode og P5 serial control appen. Trinnene nedenfor sætter denne server op og kører eksempelkode på arduino og p5js, så du kan styre en p5js sketch med to potentiometre fra din arduino.
 
-
+0.5. Download den øverste version af P5 serial control på dette link: https://github.com/p5-serial/p5.serialcontrol/releases 
 
 1. Download eller clone dette repository så du har filerne lokalt på din computer
 
@@ -19,8 +18,8 @@ For at lave en forbindelse mellem din arduino og p5js skal du bruge 3 ting: ardu
 
    ![install serialserver](./media/arduino-port-name.png)
 
-3. Åbn så p5js koden der ligger her: ```P5JS/P5JS/sketch.js```
-På linje 9 står der
+3. Åbn så p5js koden der ligger her: ```P5JS-serielkommunikation-med-P5serialcontrol/P5JS/sketch.js```
+På linje 7 står der
 
    ```var portName = '/dev/cu.usbmodem1411';```
 
@@ -30,23 +29,17 @@ På linje 9 står der
 
    ![](./media/arduino-kredsløb.png)
 
-5. Åbn så arduinokoden du finder her: ```/P5JS/Arduino/Arduino.ino ``` og upload det til arduinoen
+5. Åbn så arduinokoden du finder her: ```/P5JS-serielkommunikation-med-P5serialcontrol/Arduino/Arduino.ino ``` og upload det til arduinoen
 
-6. Åbn PC commandPrompt eller MAC Terminalen så du kan installere og køre seriel-serveren
+6. Åbn P5 serial control appen
 
-7. Skriv først ```npm install p5.serialserver``` for at installere serveren
+7. Vælg den samme port som før i drop down menuen
 
-  ![install serialserver](./media/npm-install.png)
+  ![Vælg port](./media/p5_seriel_control.png)
 
-8. Hvis du er på en Mac, ```node ~/node_modules/p5.serialserver/startserver.js``` ellers, Windows ```node ./node_modules/p5.serialserver/startserver.js```for at starte den
+8. Tryk på "open" for at åbne porten
 
-  ![install serialserver](./media/node-start-server.png)
-
-  ![install serialserver](./media/startserver_windows.png)
-
-9. Hvis serialserveren kører, skulle det gerne se sådan ud. Lad terminalvinduet forblive åbent så længe du skal bruge serveren. Du vil også se fejlbeskeder her i terminalen, hvis der opstår problemer i kommunikationen mellem arduinoen og p5js.
-
-  ![install serialserver](./media/server-is-running.png)
+9. Lad P5 seriel control appen forblive åbent så længe du skal bruge serveren. 
 
 10. Kør så din p5js sketch og interager med dine potentiometre for at styre p5js sketchen.   
 Du kan f.eks. åbne den med ```atom-live-server```-pakken, hvis du bruger Atom.   
